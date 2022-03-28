@@ -4,7 +4,7 @@
 
 int main(int argc, char *argv[]){
     int offset = atoi(argv[1]);
-    char* data_s = argv[2];
+    char* data_s = strtok(argv[2],"\"");
     FILE* target_file;
 
     target_file = fopen(argv[3],"r+");    
