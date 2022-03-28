@@ -1,30 +1,38 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 int main(void){
-	char* one = "10";
-	char two = '2';
-	char three = '3';
-	// int first = atoi(one);
-	int sec = (int)one;
-	int third = (int)one;
+	FILE* file = fopen("testFile4.txt", "r+");
+	
+	if(file == NULL){
+		printf("Failed to open file...\n");
+		return 0;
+	}
 
-	char* str[] = {"12", "234", "3456"};
-	int first = atoi(str[1]);
+	int c[1];
+	c[0] = getc(file);
+	printf("%c ",c[0]);
+	
+	fwrite(c,sizeof(char),strlen(c),file);
+	c[0] = getc(file);
+	printf("%c ",c[0]);
+	
+	fwrite(c,sizeof(char),strlen(c),file);
+	c[0] = getc(file);
+	printf("%c ",c[0]);
+	
+	fwrite(c,sizeof(char),strlen(c),file);
+	c[0] = getc(file);
+	printf("%c ",c[0]);
+	
+	fwrite(c,sizeof(char),strlen(c),file);
+	c[0] = getc(file);
+	printf("%c ",c[0]);
+	
+	fwrite(c,sizeof(char),strlen(c),file);
 
-	char ctr[] = "1234567";
+	fclose(file);
 
-
-	printf("%s\n", ctr);
-	printf("%s\n", str[0]);
-	printf("%s\n", str[1]);
-	printf("%s\n", str[2]);
-	printf("%s\n", str);
-
-	printf("%d\n", sizeof(ctr));
-	printf("%d\n", sizeof(str[0]));
-	printf("%d\n", sizeof(str[1]));
-	printf("%d\n", sizeof(str[2]));
-	printf("%d\n", sizeof(str));
 	return 0;
 }
