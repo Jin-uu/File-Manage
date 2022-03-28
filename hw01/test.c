@@ -11,26 +11,29 @@ int main(void){
 	}
 
 	int c[1];
+
 	c[0] = getc(file);
 	printf("%c ",c[0]);
+	fwrite(c,sizeof(char),1,file);
 	
-	fwrite(c,sizeof(char),strlen(c),file);
 	c[0] = getc(file);
 	printf("%c ",c[0]);
+	fwrite(c,sizeof(char),1,file);
 	
-	fwrite(c,sizeof(char),strlen(c),file);
 	c[0] = getc(file);
 	printf("%c ",c[0]);
+	fwrite(c,sizeof(char),1,file);
 	
-	fwrite(c,sizeof(char),strlen(c),file);
 	c[0] = getc(file);
 	printf("%c ",c[0]);
+	fwrite(c,sizeof(char),1,file);
 	
-	fwrite(c,sizeof(char),strlen(c),file);
 	c[0] = getc(file);
 	printf("%c ",c[0]);
-	
-	fwrite(c,sizeof(char),strlen(c),file);
+	fwrite(c,sizeof(char),1,file);
+
+	// char c[] = "1111";
+	// fwrite(c,sizeof(char),strlen(c),file);
 
 	fclose(file);
 
