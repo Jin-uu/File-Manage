@@ -9,10 +9,22 @@ int main(void){
 	int sec = (int)one;
 	int third = (int)one;
 
-	char* str[3] = {"123", "234", "345"};
+	char* str[] = {"12", "234", "3456"};
 	int first = atoi(str[1]);
 
+	char ctr[] = "1234567";
 
-	printf("%d\n", first);
+
+	printf("%s\n", ctr);
+	printf("%s\n", str[0]);
+	printf("%s\n", str[1]);
+	printf("%s\n", str[2]);
+	printf("%s\n", str);
+
+	printf("%d\n", sizeof(ctr));
+	printf("%d\n", sizeof(str[0]));
+	printf("%d\n", sizeof(str[1]));
+	printf("%d\n", sizeof(str[2]));
+	printf("%d\n", sizeof(str));
 	return 0;
 }
