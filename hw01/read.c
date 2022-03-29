@@ -46,6 +46,8 @@ int main(int argc, char *argv[]){
         }
     }
 
+    printf("\n");
+
 	fclose(original_file);		// 대상파일 닫음
 	return 0;
 }
