@@ -16,19 +16,23 @@ int main(int argc, char *argv[]){
 		return 0;
 	}
 
+    int read_start, read_end;
+    if(byte_num == 0){
+        fclose(original_file);
+        return 0;
+    }
+    if(byte_num < 0 ){
+        read_start = offset + byte_num;
+        if(read_start < 0) read_start = 0;
+        read_end = offset - 1;
+        if(read_end < read_start) return 0;
+    }
     int curr_cnt=0;
     if(byte_num == 0) return 0;             // 바이트 수가 0일 경우
     if(byte_num < 0){                       // 바이트 수가 음수일 경우
-        fseek(original_file, offset, SEEK_CUR);
-        char c = getc(original_file);
-        for(int i=0; i<abs(byte_num); i++){
-            fseek(original_file, -2, SEEK_CUR);
-            if(ftell(original_file)==0){ 
-                c = getc(original_file);
-                putchar(c);
-                break;
-            }
-            c = getc(original_file);
+        fseek(original_file, read_start, SEEK_SET);
+        for(int i=0; i<=read_end - read_start; i++){
+            char c = getc(original_file);
             putchar(c);
         }
     }
