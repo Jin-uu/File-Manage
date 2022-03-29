@@ -69,8 +69,7 @@ int main(int argc, char const *argv[]){
         curr_loc++;
     }
 
-    truncate(target_file,file_size - (del_end - del_start));
-
+    truncate(file_name,file_size - (del_end - del_start+1));
 
     return 0;
 }
