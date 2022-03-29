@@ -48,7 +48,7 @@ int main(int argc, char *argv[]){
         }
     }
 
-    fseek(target_file, offset,SEEK_SET);
+    fseek(target_file, offset+1,SEEK_SET);
     fwrite(data_s,sizeof(char),strlen(data_s),target_file);
     
     fclose(target_file);
