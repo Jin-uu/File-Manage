@@ -1,8 +1,9 @@
-#define DEBUG
+// #define DEBUG
 #include <stdio.h>
 #include <unistd.h>
+#include <stdlib.h>
 
-int main(int argc, char const *argv[]){
+int main(int argc, char *argv[]){
     FILE* target_file;
     int offset;
     int byte_num;
@@ -14,8 +15,8 @@ int main(int argc, char const *argv[]){
     file_name = "testFile3.txt";
     #endif
     #ifndef DEBUG
-    offset = argv[1];
-    byte_num = argv[2];
+    offset = atoi(argv[1]);
+    byte_num = atoi(argv[2]);
     file_name = argv[3];
     #endif
 
