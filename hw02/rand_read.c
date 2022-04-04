@@ -1,9 +1,10 @@
-#define DEBUG
+// #define DEBUG
 
 #include <stdio.h>
 #include <sys/types.h>
 #include <time.h>
 #include <stdlib.h>
+#include <sys/time.h>
 //필요하면 header file 추가 가능
 
 
@@ -16,6 +17,10 @@ void swap(int *a, int *b);
 //
 // input parameters: 레코드 파일
 //
+float time_diff(struct timeval *start, struct timeval *end){
+    return (end->tv_sec - start->tv_sec) + 1e-6*(end->tv_usec - start->tv_usec);
+}
+
 int main(int argc, char **argv){
 	int *read_order_list;
 	int num_of_records;
@@ -51,7 +56,11 @@ int main(int argc, char **argv){
 
 	// 'read_order_list'를 이용하여 레코드 파일로부터 전체 레코드를 random 하게 읽어들이고,
 	// 이때 걸리는 시간을 측정하는 코드 구현
-	
+	struct timeval startTime, endTime;
+	double diffTime;
+
+	gettimeofday(&startTime, NULL);
+
 	int cnt=0;
 	for (int i = 0; i < file_size; i++){
 		fseek(target_file,read_order_list[i],SEEK_SET);
@@ -64,6 +73,9 @@ int main(int argc, char **argv){
 	#ifdef DEBUG
 	printf("\n%d \n",cnt);
 	#endif
+
+	gettimeofday(&endTime, NULL);
+	printf("%0.4f usec\n", time_diff(&startTime,&endTime)*1000.0);
 	
 
 	return 0;
