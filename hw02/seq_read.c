@@ -1,20 +1,20 @@
-#define DEBUG
+// #define DEBUG
 #include <stdio.h>
 #include <sys/time.h>
 
-//ÇÊ¿äÇÏ¸é header file Ãß°¡ °¡´É
+//ï¿½Ê¿ï¿½ï¿½Ï¸ï¿½ header file ï¿½ß°ï¿½ ï¿½ï¿½ï¿½ï¿½
 
 
 //
-// input parameters: ·¹ÄÚµå ÆÄÀÏ
+// input parameters: ï¿½ï¿½ï¿½Úµï¿½ ï¿½ï¿½ï¿½ï¿½
 //
 float time_diff(struct timeval *start, struct timeval *end){
     return (end->tv_sec - start->tv_sec) + 1e-6*(end->tv_usec - start->tv_usec);
 }
 
 int main(int argc, char **argv){
-	// ·¹ÄÚµå ÆÄÀÏ·ÎºÎÅÍ ÀüÃ¼ ·¹ÄÚµå¸¦ ¼øÂ÷ÀûÀ¸·Î ÀÐ¾îµéÀÌ°í, ÀÌ¶§
-	// °É¸®´Â ½Ã°£À» ÃøÁ¤ÇÏ´Â ÄÚµå ±¸Çö
+	// ï¿½ï¿½ï¿½Úµï¿½ ï¿½ï¿½ï¿½Ï·Îºï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½Úµå¸¦ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ð¾ï¿½ï¿½ï¿½Ì°ï¿½, ï¿½Ì¶ï¿½
+	// ï¿½É¸ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Úµï¿½ ï¿½ï¿½ï¿½ï¿½
 	FILE* target_file;
 	char* file_name;
 	#ifdef DEBUG
@@ -28,7 +28,7 @@ int main(int argc, char **argv){
 	struct timeval startTime, endTime;
 	double diffTime;
 
-	gettimeofdat(&startTime, NULL);
+	gettimeofday(&startTime, NULL);
 
 	target_file = fopen(file_name, "r");
 	if(target_file == NULL){
@@ -46,7 +46,7 @@ int main(int argc, char **argv){
 	}
 
 	gettimeofday(&endTime, NULL);
-	printf("%d usec", time_diff(&startTime,&endTime)*1000.0);
+	printf("%0.4f usec\n", time_diff(&startTime,&endTime)*1000.0);
 
 	return 0;
 }
