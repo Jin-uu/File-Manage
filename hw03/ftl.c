@@ -8,8 +8,10 @@
 #include <time.h>
 #include "blkmap.h"
 
-AddrMapTable addrmaptbl;
+AddrMapTbl addrmaptbl;
 extern FILE *devicefp;
+int reserved_empty_blk = DATABLKS_PER_DEVICE;
+
 
 /****************  prototypes ****************/
 void ftl_open();
@@ -43,10 +45,9 @@ void ftl_open()
 // file system을 위한 FTL이 제공하는 write interface
 // 'sectorbuf'가 가리키는 메모리의 크기는 'SECTOR_SIZE'이며, 호출하는 쪽에서 미리 메모리를 할당받아야 함
 //
-void ftl_write(int lsn, char *sectorbuf);
-{
+void ftl_write(int lsn, char *sectorbuf) {
 #ifdef PRINT_FOR_DEBUG			// 필요 시 현재의 block mapping table을 출력해 볼 수 있음
-	print_addrmaptbl_info();
+	print_addrmaptbl();
 #endif
 
 	//
@@ -55,7 +56,6 @@ void ftl_write(int lsn, char *sectorbuf);
 	// overwrite를 해결하고 난 후 당연히 reserved_empty_blk는 overwrite를 유발시킨 (invalid) block이 되어야 함
 	// 따라서 reserved_empty_blk는 고정되어 있는 것이 아니라 상황에 따라 계속 바뀔 수 있음
 	//
-	int reserved_empty_blk = DATABLKS_PER_DEVICE;
 
 
 	return;
@@ -65,10 +65,10 @@ void ftl_write(int lsn, char *sectorbuf);
 // file system을 위한 FTL이 제공하는 read interface
 // 'sectorbuf'가 가리키는 메모리의 크기는 'SECTOR_SIZE'이며, 호출하는 쪽에서 미리 메모리를 할당받아야 함
 // 
-void ftl_read(int lsn, char *sectorbuf);
+void ftl_read(int lsn, char *sectorbuf)
 {
 #ifdef PRINT_FOR_DEBUG			// 필요 시 현재의 block mapping table을 출력해 볼 수 있음
-	print_addrmaptbl_info();
+	print_addrmaptbl();
 #endif
 
 	return;
@@ -90,7 +90,7 @@ void print_block(int pbn)
 
 	for(i = pbn*PAGES_PER_BLOCK; i < (pbn+1)*PAGES_PER_BLOCK; i++)
 	{
-		read(i, pagebuf);
+		dd_read(i, pagebuf);
 		memcpy(sdata, pagebuf+SECTOR_SIZE, SPARE_SIZE);
 		printf("\t   %5d-[%7d]\n", i, sdata->lsn);
 	}
