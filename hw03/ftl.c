@@ -29,10 +29,12 @@ void ftl_open()
 	int i;
 
 	// initialize the address mapping table
-	for(i = 0; i < DATABLKS_PER_DEVICE; i++)
-	{
-		addrmaptbl.pbn[i] = -1;
+	for(i = 0; i < DATABLKS_PER_DEVICE; i++) {
+		addrmaptbl.pbn[i] = DATABLKS_PER_DEVICE-i;
 	}
+#ifdef PRINT_FOR_DEBUG
+	print_addrmaptbl();
+#endif
 
 	//
 	// 추가적으로 필요한 작업이 있으면 수행하면 되고 없으면 안해도 무방함
@@ -109,7 +111,7 @@ void print_addrmaptbl()
 	int i;
 
 	printf("Address Mapping Table: \n");
-	for(i = 0; i < DATABLKS_PER_DEVICE; i++)
+	for(i = 0; i <= DATABLKS_PER_DEVICE+1; i++)
 	{
 		if(addrmaptbl.pbn[i] >= 0)
 		{
